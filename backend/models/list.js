@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const listSchema = {
+
+const listSchema = new mongoose.Schema({
     title: {
         type: String,
     },
@@ -8,14 +9,8 @@ const listSchema = {
     },
     user: {
         type: mongoose.Types.ObjectId,
-        ref: "user"
-    },
-    user: [
-    {
-        type: mongoose.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     }
-    ]
-}
+});
 
-module.exports = mongoose.model("list",listSchema);
+module.exports = mongoose.model("List", listSchema);

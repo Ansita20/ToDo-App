@@ -1,11 +1,18 @@
-const express = require("express")
+const express = require("express");
+const connectToDB = require("./connection/connection.js");
+const authRoutes = require("./routers/auth.js");
+const listouter = require("./routers/list.js")
+
 const app = express();
-require("./connection/connection.js")
+const PORT = 5000;
 
-app.get("/", (req,res) => {
-    res.send("hello");
-});
+app.use(express.json());
 
-app.listen(1000, () => {
-    console.log("server started");
+connectToDB();
+
+app.use("/api/auth", authRoutes);
+app.use("/api/router",listouter);
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
